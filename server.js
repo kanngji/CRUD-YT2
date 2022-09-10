@@ -9,7 +9,19 @@ app.use("/articles", articleRouter);
 
 //route 설정
 app.get("/", (req, res) => {
-  res.render("index", { text: "hello" });
+  const articles = [
+    {
+      title: "Test Article",
+      createdAt: new Date(),
+      description: "Test description",
+    },
+    {
+      title: "Test Article2",
+      createdAt: new Date(),
+      description: "Test description2",
+    },
+  ];
+  res.render("articles/index", { articles: articles });
 });
 
 app.listen(3000);

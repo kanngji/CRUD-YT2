@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("In articles");
+router.get("/new", (req, res) => {
+  res.render("articles/new");
 });
 
-router.get("/edit", (req, res) => {
-  res.send("article 속 edit 입니다");
-});
+// new.ejs form에서 날린 action
+router.post("/", (req, res) => {});
+
 module.exports = router;
