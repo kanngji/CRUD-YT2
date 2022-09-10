@@ -1,11 +1,17 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const articleRouter = require("./routes/articles");
 const app = express();
 
-//view engine 세팅하기
-app.set("view engine", "ejs");
+// mongoose 연결
+mongoose.connect("mongodb://localhost/blog", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-app.use("/articles", articleRouter);
+// view engine 세팅하기
+app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: false }));
 
 //route 설정
 app.get("/", (req, res) => {
@@ -23,5 +29,7 @@ app.get("/", (req, res) => {
   ];
   res.render("articles/index", { articles: articles });
 });
+
+app.use("/articles", articleRouter);
 
 app.listen(3000);
